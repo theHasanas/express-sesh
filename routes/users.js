@@ -1,9 +1,23 @@
-var express = require('express');
-var router = express.Router();
+const express = require("express");
+const passport = require("passport");
+const { register, login, addUser } = require("../controllers/users");
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+const router = express.Router();
+
+// authentication
+router.post("/register", register);
+
+router.post(
+  "/login",
+  passport.authenticate("local", { session: false }),
+  login
+);
+
+// contacts
+router.put(
+  "/add/:userId",
+  passport.authenticate("jwt", { session: false }),
+  addUser
+);
 
 module.exports = router;

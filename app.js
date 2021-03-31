@@ -7,6 +7,8 @@ const db = require("./db/models");
 // importing routers
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const passport = require("passport");
+const { localStrategy, jwtStrategy } = require("./middleware/passport");
 
 // init app
 const app = express();
@@ -14,6 +16,9 @@ const app = express();
 // middleware
 app.use(logger("dev"));
 app.use(express.json());
+app.use(passport.initialize());
+passport.use(localStrategy);
+passport.use(jwtStrategy);
 app.use(express.static(path.join(__dirname, "public")));
 
 // routes
