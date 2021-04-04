@@ -54,7 +54,7 @@ db.Post.belongsTo(db.User, {
 });
 
 db.User.belongsToMany(db.User, {
-  through: "UserUsers",
+  through: "UserContacts",
   foreignKey: "userId",
   as: "contacts",
 });
