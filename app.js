@@ -30,9 +30,9 @@ const runApp = async () => {
   try {
     await db.sequelize.sync({ alter: true });
 
-    app.listen(8000, () => {
+    app.listen(process.env.PORT, () => {
       console.log("Express app started succeffully");
-      console.log(`Running on ${ip.address()}:8000`);
+      console.log(`Running on ${ip.address()}:${process.env.PORT}`);
     });
   } catch (error) {
     console.log("Failed to start server:", error);
